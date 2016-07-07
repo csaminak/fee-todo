@@ -2,3 +2,8 @@ body {
     background-color: $backgroundColor;
     font-family: $primaryFont;
 }
+
+footer li {
+    list-style: none;
+    float: left;
+}
