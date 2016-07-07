@@ -1,1 +1,3 @@
+(function(ns){
 
+})(ns);
