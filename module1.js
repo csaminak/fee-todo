@@ -15,20 +15,23 @@
     function addListItem (todoItem) {
         $('.items')
             .append('<li class="listItem"></li>')
-            .find('li')
+            .find('li:last-child')
                 .append('<article></article>')
                 .find('article')
                     .append('<button class="check"></button>')
                     .append('<p>' + todoItem + '</p>') //todoItem will be replaced if edited and enter is selected
                     .append('<button class="delete"></button>');
+
     }
 
     //when listItem is clicked, the <p> turn into an input field.
-    $('.listItem').on('click', function edit() {
+    $('.items').on('click', 'article', edit);
 
-        ('<input class="edit-todo" edit="text" value="">')
-
-    });
+    function edit() {
+        $('.listItem p')
+            .replaceWith('<input class="edit-todo" edit="text" value="">');
+        $('button').remove();
+    }
 
 
 
