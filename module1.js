@@ -14,24 +14,34 @@
     //add list item and the following html elements appear with it.
     function addListItem (todoItem) {
         $('.items')
-            .append('<li class="listItem"></li>')
+            .append('<li class="todoItem"></li>')
             .find('li:last-child')
                 .append('<article></article>')
                 .find('article')
                     .append('<button class="check"></button>')
-                    .append('<p>' + todoItem + '</p>') //todoItem will be replaced if edited and enter is selected
+                    .append('<p class="todoText">' + todoItem + '</p>') //todoItem will be replaced if edited and enter is selected
                     .append('<button class="delete"></button>');
-
+        $('.delete').hide();
+        console.log($('.items li').length);
     }
 
     //when listItem is clicked, the <p> turn into an input field.
-    $('.items').on('click', 'article', edit);
+    $('.items').on('click', '.todoText', edit);
 
-    function edit() {
-        $('.listItem p')
-            .replaceWith('<input class="edit-todo" edit="text" value="">');
-        $('button').remove();
+    function edit(event) {
+        $(event.target)
+            .replaceWith('<input class="edit-todo" edit="text" value="'+event.target.innerText+'">');
+        // $('button').remove();
     }
+
+
+    // $('.items article').mouseover(deleteListItem);
+    //
+    // function deleteListItem() {
+    //     $('.delete').show();
+    // }
+
+
 
 
 
