@@ -1,8 +1,8 @@
-(function(ns, $){
+(function(ns){
     'strict';
 
     window.todo = ns =(window.todo || {})
 
 
 
-})(window.todo, window.jquery);
+})(window.todo);
