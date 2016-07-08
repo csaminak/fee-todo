@@ -1,4 +1,4 @@
-(function(ns, $){
+(function(ns){
     'strict';
 
     window.todo = ns = (window.todo || {})
@@ -8,6 +8,7 @@
             event.preventDefault();
             var listItem = $('input').val();
             addListItem(listItem);
+            $('.new-todo').val('');
     });
 
 
@@ -26,4 +27,4 @@
 
 
 
-})(window.todo, window.jquery);
+})(window.todo);
