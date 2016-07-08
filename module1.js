@@ -30,8 +30,12 @@
 
     function edit(event) {
         $(event.target)
-            .replaceWith('<input class="edit-todo" edit="text" value="'+event.target.innerText+'">');
-        // $('button').remove();
+            .replaceWith('<input class="editToDo"></input>')
+            .find('.editToDo')
+                .attr({
+                    type: 'text',
+                    value: 'event.target.innerText'
+                });
     }
 
 
