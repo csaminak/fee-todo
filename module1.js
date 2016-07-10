@@ -26,7 +26,7 @@
             .find('li:last-child')
                 .append('<article></article>')
                 .find('article')
-                    .append('<button class="check"></button>')
+                    .append('<button class="check" ></button>')
                     .append('<p class="todoText">' + toDoItem + '</p>') //toDoItem will be replaced if edited and enter is selected
                     .append('<button class="delete"></button>');
         $('.delete').hide();
@@ -72,12 +72,32 @@
     }
 
 
-    $('.show-active').on('click', '.toDoItem', function());
+    $('.items').on('click', '.check', function(event){
 
-    function showIncomplete () {
-        $('.toDoItem')
-            .show();
-    }
+        var todoText = $(event.target)
+            .closest('.toDoItem')
+                .toggleClass('complete')
+                .find('.todoText')
+                    .text();
+
+        //jquery method to do for loop in easier format: look up
+        var i;
+        for (i=0; i < ns.toDoList.length; i++) {
+            if (ns.toDoList[i].text === todoText) {
+                ns.toDoList[i].complete = !ns.toDoList[i].complete;
+                console.log(ns.toDoList[i]);
+            }
+        }
+    });
+
+
+
+    // $('.show-active').on('click', '.toDoItem', showIncomplete);
+    //
+    // function showIncomplete () {
+    //     $('.items')
+    //         .show(ns.toDoList.complete);
+    // }
 
 
 
