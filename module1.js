@@ -3,6 +3,8 @@
 
     window.todo = ns = (window.todo || {})
 
+    ns.toDoList = [];
+
     //when page loads
     $('form').on('submit', function(event){
             event.preventDefault();
@@ -21,8 +23,12 @@
                     .append('<button class="check"></button>')
                     .append('<p class="todoText">' + todoItem + '</p>') //todoItem will be replaced if edited and enter is selected
                     .append('<button class="delete"></button>');
+        ns.toDoList.push({
+            timestamp: Date.now(),
+            text: todoItem,
+            complete: false
+        })
         $('.delete').hide();
-        console.log($('.items li').length);
     }
 
     //when listItem is clicked, the <p> turn into an input field.
@@ -30,13 +36,29 @@
 
     function edit(event) {
         $(event.target)
-            .replaceWith('<input class="editToDo"></input>')
-            .find('.editToDo')
-                .attr({
-                    type: 'text',
-                    value: 'event.target.innerText'
-                });
+            .replaceWith('<input class="editToDo" type="text" value=' + event.target.innerText + '></input>');
+
+        $('.editToDo').on('keypress', function(event) {
+            var editedItem = $('.editToDo').val();
+            if(event.keyCode === 13) {
+                $('.editToDo')
+                    .replaceWith('<p class="todoText">' + editedItem + '</p>')
+            }
+        });
+
+
+        if($('header').on('click', event.target, escape));
+        if($('footer').on('click', event.target, escape));
+
+        function escape() {
+            $('.editToDo')
+                .replaceWith('<p class="todoText">' + $('.editToDo').val() + '</p>');
+        }
     }
+
+
+
+
 
 
     // $('.items article').mouseover(deleteListItem);
