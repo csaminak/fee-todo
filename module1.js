@@ -5,35 +5,48 @@
 
     ns.toDoList = [];
 
-    //when page loads
     $('form').on('submit', function(event){
             event.preventDefault();
-            var todoItem = $('input').val();
-            addListItem(todoItem);
+            var toDoItem = $('input').val();
+            addListItem(toDoItem);
             $('.new-todo').val('');
     });
 
-    //add list item and the following html elements appear with it.
-    function addListItem (todoItem) {
+
+    /**
+     * [Adding a list item and the html elements that get created with it,
+     * along with the complete and delete buttons and their visibility.
+     * The list item creates an object in the toDoList array and will be
+     * tracked in the incomplete-items count.]
+     * @param {[string]} toDoItem [the toDoItem name/sentence]
+     */
+    function addListItem (toDoItem) {
         $('.items')
-            .append('<li class="todoItem"></li>')
+            .append('<li class="toDoItem"></li>')
             .find('li:last-child')
                 .append('<article></article>')
                 .find('article')
                     .append('<button class="check"></button>')
-                    .append('<p class="todoText">' + todoItem + '</p>') //todoItem will be replaced if edited and enter is selected
+                    .append('<p class="todoText">' + toDoItem + '</p>') //toDoItem will be replaced if edited and enter is selected
                     .append('<button class="delete"></button>');
+        $('.delete').hide();
         ns.toDoList.push({
             timestamp: Date.now(),
-            text: todoItem,
+            text: toDoItem,
             complete: false
-        })
-        $('.delete').hide();
+        });
+        $('.incomplete-items').text(ns.toDoList.length);
     }
 
-    //when listItem is clicked, the <p> turn into an input field.
-    $('.items').on('click', '.todoText', edit);
 
+    $('.items').on('click', '.todoText', edit);
+    /**
+     * [When a user wants to edit a toDoItem they can click the item,
+     * then save it or they can escape the edit function by clicking the
+     * footer area or the header area]
+     * @param  {[event]}   [event is the specfic item that is clicked to edit]
+     * @return {[string]}  [an edited/new string or goes back to inital state]
+     */
     function edit(event) {
         $(event.target)
             .replaceWith('<input class="editToDo" type="text" value=' + event.target.innerText + '></input>');
@@ -46,15 +59,27 @@
             }
         });
 
-
         if($('header').on('click', event.target, escape));
         if($('footer').on('click', event.target, escape));
-
+        /**
+         * [allows user to escape the edit function]
+         * @return void
+         */
         function escape() {
             $('.editToDo')
                 .replaceWith('<p class="todoText">' + $('.editToDo').val() + '</p>');
         }
     }
+
+
+    $('.show-active').on('click', '.toDoItem', function());
+
+    function showIncomplete () {
+        $('.toDoItem')
+            .show();
+    }
+
+
 
 
 
