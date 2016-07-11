@@ -49,6 +49,7 @@
         console.log(event.target);
         if (event.target.className === 'show-active') {
             $('.complete').hide();
+            $('.incomplete').show();
         } else if (event.target.className === 'show-completed') {
             $('.incomplete').hide();
             $('.complete').show();
@@ -58,5 +59,6 @@
             $('.complete').remove();
         }
     }
+
 
 })(window.todo);
