@@ -30,12 +30,32 @@
                     .append('<p class="todoText">' + toDoItem + '</p>') //toDoItem will be replaced if edited and enter is selected
                     .append('<button class="delete"></button>');
         $('.delete').hide();
+
         ns.toDoList.push({
             timestamp: Date.now(),
             text: toDoItem,
             complete: false
         });
-        $('.incomplete-items').text(ns.toDoList.length);
+
+        incompleteCounter();
+    }
+
+
+    /**
+     * [setting the counter for items incomplete]
+     * @return {[number]} [incomplete items on toDoList]
+     */
+    function incompleteCounter() {
+        $('.incomplete-items').text(function () {
+            var i;
+            var incompleteItems = 0;
+            for (i=0; i < ns.toDoList.length; i++) {
+                if (ns.toDoList[i].complete === false) {
+                    incompleteItems += 1;
+                }
+            }
+            return incompleteItems;
+        });
     }
 
 
@@ -72,7 +92,14 @@
     }
 
 
-    $('.items').on('click', '.check', function(event){
+    $('.items').on('click', '.check', markComplete);
+    /**
+     * [marks a toDoItem complete and then updates the object in
+     * the toDoList Array, and updates the incompleteCounter]
+     * @param  {[event]}   [which will be a click on the complete button]
+     * @return {[number]}  [updated incompleteCounter]
+     */
+    function markComplete(event) {
 
         var todoText = $(event.target)
             .closest('.toDoItem')
@@ -80,24 +107,15 @@
                 .find('.todoText')
                     .text();
 
-        //jquery method to do for loop in easier format: look up
         var i;
         for (i=0; i < ns.toDoList.length; i++) {
             if (ns.toDoList[i].text === todoText) {
                 ns.toDoList[i].complete = !ns.toDoList[i].complete;
-                console.log(ns.toDoList[i]);
             }
         }
-    });
 
-
-
-    // $('.show-active').on('click', '.toDoItem', showIncomplete);
-    //
-    // function showIncomplete () {
-    //     $('.items')
-    //         .show(ns.toDoList.complete);
-    // }
+        incompleteCounter();
+    }
 
 
 
