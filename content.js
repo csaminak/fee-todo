@@ -4,7 +4,6 @@
     window.todo = ns =(window.todo || {})
 
 
-
     $('.items').on('click', '.todoText', edit);
     /**
      * [When a user wants to edit a toDoItem they can click the item,
@@ -50,10 +49,9 @@
         console.log(event.target);
         if (event.target.className === 'show-active') {
             $('.complete').hide();
-            $('.items')
-                .addClass('incompleteItems');
         } else if (event.target.className === 'show-completed') {
             $('.incomplete').hide();
+            $('.complete').show();
         } else if (event.target.className === 'show-all-active') {
             $('.toDoItem').show();
         } else if (event.target.className === 'clear') {
