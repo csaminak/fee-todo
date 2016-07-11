@@ -22,7 +22,7 @@
      */
     function addListItem (toDoItem) {
         $('.items')
-            .append('<li class="toDoItem"></li>')
+            .append('<li class="toDoItem incomplete"></li>')
             .find('li:last-child')
                 .append('<article></article>')
                 .find('article')
@@ -104,6 +104,7 @@
         var todoText = $(event.target)
             .closest('.toDoItem')
                 .toggleClass('complete')
+                .removeClass('incomplete')
                 .find('.todoText')
                     .text();
 
@@ -118,18 +119,27 @@
     }
 
 
-
-
-
-
-
-
-    // $('.items article').mouseover(deleteListItem);
-    //
-    // function deleteListItem() {
-    //     $('.delete').show();
-    // }
-
+    $('footer').on('click', viewButtons);
+    /**
+     * [function that selects the code that will run depending on
+     * which button was clicked]
+     * @param  {[event]}  [button click]
+     * @return {[object]} [will return matching toDoList Items]
+     */
+    function viewButtons(event) {
+        console.log(event.target);
+        if (event.target.className === 'show-active') {
+            $('.complete').hide();
+            $('.items')
+                .addClass('incompleteItems');
+        } else if (event.target.className === 'show-completed') {
+            $('.incomplete').hide();
+        } else if (event.target.className === 'show-all-active') {
+            $('.toDoItem').show();
+        } else if (event.target.className === 'clear') {
+            $('.complete').remove();
+        }
+    }
 
 
 
