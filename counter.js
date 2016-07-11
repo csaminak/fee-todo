@@ -30,7 +30,7 @@
                     .append('<button class="check" ></button>')
                     .append('<p class="todoText">' + toDoItem + '</p>') //toDoItem will be replaced if edited and enter is selected
                     .append('<button class="delete"></button>');
-        $('.delete').hide();
+        // $('.delete').hide();
 
         ns.toDoList.push({
             timestamp: Date.now(),
@@ -83,8 +83,35 @@
             }
         }
 
+        $(event.target)
+            .closest('.complete')
+            .find('.todoText')
+                .css('textDecoration', 'line-through');
+
         incompleteCounter();
     }
+
+
+    $('.items').on('click', '.delete', function(event){
+
+        var toRemove = $(event.target)
+            .closest('.toDoItem')
+            .find('.todoText')
+                .text();
+
+        var i;
+        for (i=0; i < ns.toDoList.length; i++) {
+            if (ns.toDoList[i].text === toRemove) {
+                ns.toDoList.splice(i, 1);
+            }
+        }
+
+        $(event.target)
+            .closest('.toDoItem')
+                .remove();
+
+        incompleteCounter();
+    })
 
 
 
