@@ -394,6 +394,17 @@ form .new-todo {
   .items article button, .items article p, .items article input {
     display: inline-block; }
 
+.toDoItem:hover .check {
+  display: inline;
+  background-color: #00f42f;
+  height: 20px; }
+.toDoItem:hover .delete {
+  display: inline;
+  background-color: #ff0000;
+  height: 20px; }
+.toDoItem .delete {
+  display: none; }
+
 footer::after {
   clear: both;
   content: ' ';
